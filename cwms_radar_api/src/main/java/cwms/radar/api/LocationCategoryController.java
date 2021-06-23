@@ -27,6 +27,7 @@ import static com.codahale.metrics.MetricRegistry.name;
 public class LocationCategoryController implements CrudHandler
 {
 	public static final Logger logger = Logger.getLogger(LocationCategoryController.class.getName());
+	public static final String OPENAPI_TAG = "Location Categories (Beta)";
 
 	private final MetricRegistry metrics;
 	private final Meter getAllRequests;
@@ -56,7 +57,7 @@ public class LocationCategoryController implements CrudHandler
 			}
 			),
 					@OpenApiResponse(status = "404", description = "Based on the combination of inputs provided the categories were not found."),
-					@OpenApiResponse(status = "501", description = "request format is not implemented")}, description = "Returns CWMS Location Category Data", tags = {"Location Categories"})
+					@OpenApiResponse(status = "501", description = "request format is not implemented")}, description = "Returns CWMS Location Category Data", tags = {OPENAPI_TAG})
 	@Override
 	public void getAll(Context ctx)
 	{
@@ -104,7 +105,7 @@ public class LocationCategoryController implements CrudHandler
 					),
 					@OpenApiResponse(status = "404", description = "Based on the combination of inputs provided the Location Category was not found."),
 					@OpenApiResponse(status = "501", description = "request format is not implemented")},
-			description = "Retrieves requested Location Category", tags = {"Location Categories"})
+			description = "Retrieves requested Location Category", tags = {OPENAPI_TAG})
 	@Override
 	public void getOne(Context ctx, String categoryId)
 	{

@@ -27,6 +27,7 @@ import static com.codahale.metrics.MetricRegistry.name;
 public class LocationGroupController implements CrudHandler
 {
 	public static final Logger logger = Logger.getLogger(LocationGroupController.class.getName());
+	public static final String OPENAPI_TAG = "Location Groups (Beta)";
 
 	private final MetricRegistry metrics;
 	private final Meter getAllRequests;
@@ -58,7 +59,7 @@ public class LocationGroupController implements CrudHandler
 
 			),
 					@OpenApiResponse(status = "404", description = "Based on the combination of inputs provided the location(s) were not found."),
-					@OpenApiResponse(status = "501", description = "request format is not implemented")}, description = "Returns CWMS Location Groups Data", tags = {"Location Groups"})
+					@OpenApiResponse(status = "501", description = "request format is not implemented")}, description = "Returns CWMS Location Groups Data", tags = {OPENAPI_TAG})
 	@Override
 	public void getAll(Context ctx)
 	{
@@ -105,7 +106,7 @@ public class LocationGroupController implements CrudHandler
 			),
 					@OpenApiResponse(status = "404", description = "Based on the combination of inputs provided the location group was not found."),
 					@OpenApiResponse(status = "501", description = "request format is not implemented")},
-			description = "Retrieves requested Location Group", tags = {"Location Groups"})
+			description = "Retrieves requested Location Group", tags = {OPENAPI_TAG})
 	@Override
 	public void getOne(Context ctx, String groupId)
 	{
