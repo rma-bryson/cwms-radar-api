@@ -14,6 +14,7 @@ import org.owasp.html.PolicyFactory;
 
 import cwms.radar.data.CwmsDataManager;
 import cwms.radar.data.dto.Catalog;
+import cwms.radar.data.dto.CwmsDTOPaginated;
 import cwms.radar.data.dto.Office;
 import cwms.radar.formatters.ContentType;
 import cwms.radar.formatters.Formats;
@@ -66,14 +67,14 @@ public class CatalogController implements CrudHandler{
 
     @OpenApi(
         queryParams = {
-            @OpenApiParam(name="cursor",
+            @OpenApiParam(name="page",
                           required = false,
-                          description = "This end point can return a lot of data, this identifies where in the request you are."
+                          description = CwmsDTOPaginated.DTO_PAGE_DESCRIPTION
             ),
             @OpenApiParam(name="pageSize",
                           required= false,
                           type=Integer.class,
-                          description = "How many entires per page returned. Default 500."
+                          description = CwmsDTOPaginated.DTO_PAGESIZE_DESCRIPTION
             ),
             @OpenApiParam(name="office",
                           required = false,
@@ -106,7 +107,7 @@ public class CatalogController implements CrudHandler{
             CwmsDataManager cdm = new CwmsDataManager(ctx);
         ) {
             String valDataSet = ctx.appAttribute(PolicyFactory.class).sanitize(dataSet);
-            String cursor = ctx.queryParam("cursor",String.class,"").getValue();
+            String page = ctx.queryParam("page",String.class,"").getValue();
             int pageSize = ctx.queryParam("pageSize",Integer.class,"500").getValue().intValue();
             Optional<String> office = Optional.ofNullable(
                                          ctx.queryParam("office", String.class, null)
@@ -116,9 +117,9 @@ public class CatalogController implements CrudHandler{
             ContentType contentType = Formats.parseHeaderAndQueryParm(acceptHeader, null);
             Catalog cat = null;
             if( "timeseries".equalsIgnoreCase(valDataSet)){
-                cat = cdm.getTimeSeriesCatalog(cursor, pageSize, office );
+                cat = cdm.getTimeSeriesCatalog(page, pageSize, office );
             } else if ("locations".equalsIgnoreCase(valDataSet)){
-                cat = cdm.getLocationCatalog(cursor, pageSize, office );
+                cat = cdm.getLocationCatalog(page, pageSize, office );
             }
             if( cat != null ){
                 String data = Formats.format(contentType, cat);

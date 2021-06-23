@@ -23,14 +23,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)
 public abstract class CwmsDTOPaginated implements CwmsDTO {
-    @Schema(description = "The cursor to the current page of data")
+    public static final String DTO_PAGE_DESCRIPTION = "The cursor to the current page of data";
+    public static final String DTO_NEXTPAGE_DESCRIPTION = "The cursor to the next page of data; null if there is no more data";
+    public static final String DTO_PAGESIZE_DESCRIPTION = "The number of records fetched per-page; this may be larger than the number of records actually retrieved";
+
+    @Schema(description = DTO_PAGE_DESCRIPTION)
     protected String page;
-    @Schema(description = "The cursor to the next page of data; null if there is no more data")
+    @Schema(description = DTO_NEXTPAGE_DESCRIPTION)
     protected String nextPage;
     @JsonInclude(value = Include.NON_NULL)
     @Schema(description = "The total number of records retrieved; null or not present if not supported or unknown")
     protected Integer total;
-    @Schema(description = "The number of records fetched per-page; this may be larger than the number of records actually retrieved")
+    @Schema(description = DTO_PAGESIZE_DESCRIPTION)
     protected int pageSize;
 
     static final Encoder encoder = Base64.getEncoder();
