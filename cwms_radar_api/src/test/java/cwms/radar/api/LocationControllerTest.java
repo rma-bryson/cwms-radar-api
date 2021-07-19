@@ -1,11 +1,13 @@
 package cwms.radar.api;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,16 +28,26 @@ import static org.mockito.Mockito.when;
 
 /**
  */
-public class LocationControllerTest extends AbstractControllerTest {
+public class LocationControllerTest {
     
     private Context ctx = mock(Context.class);
-    private Connection conn = mock(Connection.class);
-    private PreparedStatement query = mock(PreparedStatement.class);
-    private ResultSet results = mock(ResultSet.class);
-    
+
+
     public LocationControllerTest() {
     }
-    
+
+    // Put your info here and it will connect to your database during the test...
+    // Not ideal.
+    protected Connection getConnection() throws SQLException
+    {
+        String url = "jdbc:oracle:thin:@hostname:1523:mysid";
+        Properties connectionProps = new Properties();
+        connectionProps.put("user", "theusername");
+        connectionProps.put("password", "thepassword");
+        final Connection conn = DriverManager.getConnection(url, connectionProps);
+        return conn;
+    }
+
 
 
     /**
