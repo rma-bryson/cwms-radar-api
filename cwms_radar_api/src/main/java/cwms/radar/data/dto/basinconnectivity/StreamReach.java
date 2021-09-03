@@ -2,7 +2,7 @@ package cwms.radar.data.dto.basinconnectivity;
 
 import cwms.radar.data.dto.CwmsDTO;
 
-public class StreamReach implements CwmsDTO
+public final class StreamReach implements CwmsDTO
 {
     private final String upstreamLocationName;
     private final String downstreamLocationName;
@@ -12,7 +12,12 @@ public class StreamReach implements CwmsDTO
     private final String comment;
     private final String configuration;
 
-    StreamReach(Builder builder)
+    private StreamReach()
+    {
+        this(new Builder("", "", "", "", "*"));
+    }
+
+    private StreamReach(Builder builder)
     {
         streamName = builder.streamName;
         reachName = builder.reachName;

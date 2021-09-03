@@ -2,7 +2,7 @@ package cwms.radar.data.dto.basinconnectivity;
 
 import cwms.radar.data.dto.CwmsDTO;
 
-public class StreamLocation implements CwmsDTO
+public final class StreamLocation implements CwmsDTO
 {
     private final String locationName;
     private final String streamName;
@@ -15,6 +15,10 @@ public class StreamLocation implements CwmsDTO
     private final Double totalDrainageArea;
     private final Double ungagedDrainageArea;
 
+    private StreamLocation()
+    {
+        this(new Builder("", "", 0.0, "L", "*"));
+    }
     private StreamLocation(Builder builder)
     {
         locationName = builder.locationName;

@@ -12,6 +12,10 @@ public final class Basin implements CwmsDTO
     private final Double contributingArea;
     private final String parentBasinId;
 
+    private Basin()
+    {
+        this(new Builder("", "*"));
+    }
     private Basin(Builder builder)
     {
         basinName = builder.basinName;

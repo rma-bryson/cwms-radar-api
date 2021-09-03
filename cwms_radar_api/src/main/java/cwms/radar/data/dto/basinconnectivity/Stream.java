@@ -23,6 +23,10 @@ public final class Stream implements CwmsDTO
     private final String comment;
     private final Double averageSlope;
 
+    private Stream()
+    {
+        this(new Builder("", false, 0.0, "*"));
+    }
     private Stream(Builder streamBuilder)
     {
         streamName = streamBuilder.streamName;
