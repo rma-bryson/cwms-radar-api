@@ -166,7 +166,7 @@ public class ForecastInstanceController implements CrudHandler {
     public void getAll(@NotNull Context ctx) {
         try (final Timer.Context ignored = markAndTime(GET_ALL)) {
             String office = ctx.queryParam(OFFICE);
-            String desionatorMask = ctx.queryParam(DESIGNATOR_MASK);
+            String desionatorMask = ctx.queryParam(DESIGNATOR);
             String name = ctx.queryParam(NAME);
 
             ForecastInstanceDao dao = new MockForecastInstanceDao(getDslContext(ctx));

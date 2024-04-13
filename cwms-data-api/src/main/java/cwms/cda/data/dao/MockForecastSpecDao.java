@@ -38,12 +38,12 @@ public class MockForecastSpecDao extends ForecastSpecDao {
         List<ForecastSpec> retval = new ArrayList<>();
 
         retval.add(buildForecastSpec(office, "test_spec_1", designator,
-                Arrays.asList("Spec1TestLocA.Flow.Inst.1Hour.0.raw","Spec1TestLocB.Flow.Inst.1Hour.0.raw"),
-                Arrays.asList("Spec1TestLocA", "Spec1TestLocB")));
+                Arrays.asList("Spec1TestLocationA.Flow.Inst.1Hour.0.raw","Spec1TestLocationB.Flow.Inst.1Hour.0.raw"),
+                Arrays.asList("Spec1TestLocationA", "Spec1TestLocationB")));
         retval.add(buildForecastSpec(office, "test_spec_2", designator,
-                Arrays.asList("Spec2TestLocA.Flow.Inst.1Hour.0.raw",
-                        "Spec2TestLocB.Flow.Inst.1Hour.0.raw", "Spec2TestLocB.Flow.Inst.1Hour.0.rew"),
-                Arrays.asList("Spec2TestLocA", "Spec2TestLocB")));
+                Arrays.asList("Spec2TestLocationA.Flow.Inst.1Hour.0.raw",
+                        "Spec2TestLocationB.Flow.Inst.1Hour.0.raw", "Spec2TestLocationB.Flow.Inst.1Hour.0.rew"),
+                Arrays.asList("Spec2TestLocationA", "Spec2TestLocationB")));
 
         return retval;
     }
@@ -51,8 +51,8 @@ public class MockForecastSpecDao extends ForecastSpecDao {
     public ForecastSpec getForecastSpec(String office, String name, String designator) {
 
         return buildForecastSpec(office, "test_spec_1", designator,
-                Arrays.asList("Spec1TestLocA.Flow.Inst.1Hour.0.raw","Spec1TestLocB.Flow.Inst.1Hour.0.raw"),
-                Arrays.asList("Spec1TestLocA", "Spec1TestLocB"));
+                Arrays.asList("Spec1TestLocationA.Flow.Inst.1Hour.0.raw","Spec1TestLocationB.Flow.Inst.1Hour.0.raw"),
+                Arrays.asList("Spec1TestLocationA", "Spec1TestLocationB"));
     }
 
     public static ForecastSpec buildForecastSpec(String office, String name, String designator, List<String> tsIds, Collection<String> locationIds) {
@@ -78,7 +78,7 @@ public class MockForecastSpecDao extends ForecastSpecDao {
         List<TimeSeriesIdentifierDescriptor> tsids = new ArrayList<>();
 
         TimeSeriesIdentifierDescriptor.Builder builder = new TimeSeriesIdentifierDescriptor.Builder();
-        builder.withOfficeId("office");
+        builder.withOfficeId("SWT");
 
         for (String tsId : tsIds) {
             tsids.add(builder.withTimeSeriesId(tsId).build());
